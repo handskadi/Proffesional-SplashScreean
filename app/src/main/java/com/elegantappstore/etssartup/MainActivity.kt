@@ -12,7 +12,7 @@ import android.widget.TextView
 import com.muddzdev.styleabletoastlibrary.StyleableToast
 
 class MainActivity : AppCompatActivity() {
-     // This Code made by www.elegantappstore.com
+     // This App made by www.elegantappstore.com
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
