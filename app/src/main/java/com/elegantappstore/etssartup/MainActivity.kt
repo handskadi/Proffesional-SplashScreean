@@ -18,24 +18,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.txtv)
-        val text = "I want This and This to be colored!"
-
-        val spst = SpannableString(text)
-        val fcGreen = ForegroundColorSpan(Color.GREEN)
-        val fcRed = ForegroundColorSpan(Color.RED)
-        val fcYellow = BackgroundColorSpan(Color.YELLOW)
-
-        spst.setSpan(fcGreen,2,5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-        spst.setSpan(fcRed,17,20, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-        spst.setSpan(fcYellow,23,27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-
-        textView.setText(spst)
+//        val textView = findViewById<TextView>(R.id.txtv)
+//        val text = "I want This and This to be colored!"
+//
+//        val spst = SpannableString(text)
+//        val fcGreen = ForegroundColorSpan(Color.GREEN)
+//        val fcRed = ForegroundColorSpan(Color.RED)
+//        val fcYellow = BackgroundColorSpan(Color.YELLOW)
+//
+//        spst.setSpan(fcGreen,2,5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
+//        spst.setSpan(fcRed,17,20, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
+//        spst.setSpan(fcYellow,23,27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
+//
+//        textView.setText(spst)
 
     }
 
     fun clickedon(view:View){
-        StyleableToast.makeText(this,"Welcome!",R.style.toasty).show()
+//        StyleableToast.makeText(this,"Welcome!",R.style.toasty).show()
 
     }
 }
