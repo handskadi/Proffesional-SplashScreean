@@ -1,41 +1,69 @@
 package com.elegantappstore.etssartup
 
-import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.style.BackgroundColorSpan
-import android.text.style.ForegroundColorSpan
 import android.view.View
-import android.widget.TextView
-import com.muddzdev.styleabletoastlibrary.StyleableToast
+import com.google.ads.consent.ConsentStatus
+import com.google.ads.consent.ConsentInfoUpdateListener
+import com.google.ads.consent.ConsentInformation
+import com.google.ads.consent.ConsentFormListener
+import com.google.ads.consent.ConsentForm
+import java.net.MalformedURLException
+import java.net.URL
+
 
 class MainActivity : AppCompatActivity() {
      // This App made by www.elegantappstore.com
+
+    // Instance variables
+    var form: ConsentForm? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        val textView = findViewById<TextView>(R.id.txtv)
-//        val text = "I want This and This to be colored!"
-//
-//        val spst = SpannableString(text)
-//        val fcGreen = ForegroundColorSpan(Color.GREEN)
-//        val fcRed = ForegroundColorSpan(Color.RED)
-//        val fcYellow = BackgroundColorSpan(Color.YELLOW)
-//
-//        spst.setSpan(fcGreen,2,5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-//        spst.setSpan(fcRed,17,20, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-//        spst.setSpan(fcYellow,23,27, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE )
-//
-//        textView.setText(spst)
+
+        /*** Start of GDPR Code - General Data Protection Regulation   ***/
+        val consentInformation = ConsentInformation.getInstance(this)
+        val publisherIds = arrayOf("pub-0123456789012345")
+        consentInformation.requestConsentInfoUpdate(publisherIds, object : ConsentInfoUpdateListener {
+            override fun onConsentInfoUpdated(consentStatus: ConsentStatus) {
+                // User's consent status successfully updated.
+            }
+
+            override fun onFailedToUpdateConsentInfo(errorDescription: String) {
+                // User's consent status failed to update.
+            }
+        })
+        var privacyUrl: URL? = null
+        try {
+             privacyUrl = URL("http://www.elegantappstore.com/privacy-policy-google-play-apps/")
+         } catch (e: MalformedURLException) {
+             e.printStackTrace()
+             // Handle error.
+         }
+        form = ConsentForm.Builder(this, privacyUrl).withListener(object : ConsentFormListener() {
+                     override fun onConsentFormLoaded() {
+                         // Consent form loaded successfully.
+                         form!!.show()
+                     }
+
+                     override fun onConsentFormOpened() {
+                         // Consent form was displayed.
+                     }
+
+                     override fun onConsentFormClosed(
+                             consentStatus: ConsentStatus?, userPrefersAdFree: Boolean?) {
+                         // Consent form was closed.
+                     }
+
+                     override fun onConsentFormError(errorDescription: String?) {
+                         // Consent form error.
+                     }
+                 }).withPersonalizedAdsOption().withNonPersonalizedAdsOption().withAdFreeOption().build()
+        form!!.load()
+         /*** End of GDPR Code - General Data Protection Regulation   ***/
 
     }
 
-    fun clickedon(view:View){
-//        StyleableToast.makeText(this,"Welcome!",R.style.toasty).show()
-
-    }
 }
